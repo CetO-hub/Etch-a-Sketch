@@ -26,7 +26,7 @@ function createGrid(userInput) {
       );
       isBigSquare.append(isSmallSquare);
     }
-    return paintBlack();
+    return listenForHover();
   } else if (userInput < 0 || userInput >= 100) {
     alert("Only integer between 1 and 100 allowed!");
     return;
@@ -34,15 +34,36 @@ function createGrid(userInput) {
   return alert("Only integer between 1 and 100 allowed!");
 }
 
-//Paint the squares black when hovering over
-function paintBlack() {
+//Listen for mouse hover event
+function listenForHover() {
   let isSmallSquares = document.querySelectorAll(".smallSquare");
-  console.log(isSmallSquares);
 
   isSmallSquares.forEach((smallSquare) =>
     smallSquare.addEventListener("mouseover", paintBlack)
   );
-  this.classList.add("smallSquareColored");
+}
+
+//Paint the squares black when hovering over
+function paintBlack() {
+  if (colorMode === "default") {
+    this.classList.add("smallSquareColored");
+  } else if (colorMode === "randomColor" && !this.style.backgroundColor) {
+    this.style.backgroundColor = generateColor();
+  }
+}
+
+function generateColor() {
+  let red = Math.floor(Math.random() * 255);
+  let green = Math.floor(Math.random() * 255);
+  let blue = Math.floor(Math.random() * 255);
+  let rgba = `rgba(${red}, ${green}, ${blue}, 1.0)`;
+  console.log(rgba);
+  return rgba;
+}
+
+function setColorOption(e) {
+  colorMode = e.target[`value`];
+  return colorMode;
 }
 
 // Create UI
@@ -56,8 +77,8 @@ let isRandomColor = document.createElement("button");
 
 isBigSquare.classList.add("bigSquare");
 isChoiceColor.classList.add("colorChoice");
-isLevelBlack.classList.add("submitButton");
-isRandomColor.classList.add("submitButton");
+isLevelBlack.classList.add("colorOption");
+isRandomColor.classList.add("colorOption");
 isLevelBlack.setAttribute("value", "levelBlack");
 isLevelBlack.setAttribute("type", "submit");
 isLevelBlack.innerHTML = "Level of black";
@@ -92,3 +113,10 @@ isSubmitGridSizeBar.append(isSubmitButton);
 // Listening for user input
 isSubmitButton = document.querySelector(".submitButton");
 isSubmitButton.addEventListener("click", submitUserInput);
+
+let colorMode = "default";
+
+let isChoiceColors = document.querySelectorAll(".colorOption");
+isChoiceColors.forEach((colorOption) =>
+  colorOption.addEventListener("click", setColorOption)
+);

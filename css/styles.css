@@ -32,7 +32,8 @@ body {
   text-align: center;
 }
 
-.submitButton {
+.submitButton,
+.colorOption {
   font-size: 30px;
 }
 
