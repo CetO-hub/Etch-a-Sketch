@@ -1,9 +1,11 @@
+// FIlter for user's input
 function submitUserInput() {
   isUserInput = document.querySelector(".userInput");
   let isGridSize = Math.floor(document.querySelector(".userInput").value);
   return createGrid(isGridSize);
 }
 
+// Clear old grid (if existing) and draw a new one
 function createGrid(userInput) {
   if (userInput > 0 && userInput <= 100) {
     let isSmallSquares = document.querySelectorAll(".smallSquare");
@@ -32,6 +34,7 @@ function createGrid(userInput) {
   return alert("Only integer between 1 and 100 allowed!");
 }
 
+//Paint the squares black when hovering over
 function paintBlack() {
   let isSmallSquares = document.querySelectorAll(".smallSquare");
   console.log(isSmallSquares);
@@ -42,15 +45,29 @@ function paintBlack() {
   this.classList.add("smallSquareColored");
 }
 
+// Create UI
 let isBigSquare = document.createElement("div");
+let isChoiceColor = document.createElement("div");
 let isSubmitGridSizeBar = document.createElement("div");
 let isUserInput = document.createElement("input");
 let isSubmitButton = document.createElement("input");
+let isLevelBlack = document.createElement("button");
+let isRandomColor = document.createElement("button");
 
 isBigSquare.classList.add("bigSquare");
+isChoiceColor.classList.add("colorChoice");
+isLevelBlack.classList.add("submitButton");
+isRandomColor.classList.add("submitButton");
+isLevelBlack.setAttribute("value", "levelBlack");
+isLevelBlack.setAttribute("type", "submit");
+isLevelBlack.innerHTML = "Level of black";
+isRandomColor.setAttribute("value", "randomColor");
+isRandomColor.setAttribute("type", "submit");
+isRandomColor.innerHTML = "Random Color";
 isSubmitGridSizeBar.classList.add("submitGridSizeBar");
 isUserInput.classList.add("userInput");
 isSubmitButton.classList.add("submitButton");
+
 isUserInput.setAttribute("autofocus", "true");
 isUserInput.setAttribute("type", "text");
 isUserInput.setAttribute(
@@ -66,8 +83,12 @@ isSubmitButton.setAttribute("value", "Create");
 
 document.body.append(isSubmitGridSizeBar);
 document.body.append(isBigSquare);
+isSubmitGridSizeBar.append(isChoiceColor);
+isChoiceColor.append(isLevelBlack);
+isChoiceColor.append(isRandomColor);
 isSubmitGridSizeBar.append(isUserInput);
 isSubmitGridSizeBar.append(isSubmitButton);
 
+// Listening for user input
 isSubmitButton = document.querySelector(".submitButton");
 isSubmitButton.addEventListener("click", submitUserInput);

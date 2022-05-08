@@ -18,6 +18,13 @@ body {
   flex-direction: column;
 }
 
+.colorChoice {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .userInput,
 [placeholder] {
   font-size: 30px;
