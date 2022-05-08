@@ -52,6 +52,7 @@ function paintBlack() {
   }
 }
 
+//Generate random color
 function generateColor() {
   let red = Math.floor(Math.random() * 255);
   let green = Math.floor(Math.random() * 255);
@@ -61,6 +62,7 @@ function generateColor() {
   return rgba;
 }
 
+//Switching between color modes and saving in global variable
 function setColorOption(e) {
   colorMode = e.target[`value`];
   return colorMode;
