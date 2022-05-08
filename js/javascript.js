@@ -9,3 +9,29 @@ while (true) {
     break;
   }
 }
+let isNumberSquares = isGridSize * isGridSize;
+console.log(isGridSize);
+let isSmallSquareWidth = 960 / isGridSize;
+let isSmallSquareHeight = 760 / isGridSize;
+for (let i = 0; i < isNumberSquares; i++) {
+  let isSmallSquare = document.createElement("div");
+  isSmallSquare.classList.add("smallSquare");
+  isSmallSquare.setAttribute(
+    "style",
+    "min-width: " +
+      isSmallSquareWidth +
+      "px; min-height: " +
+      isSmallSquareHeight +
+      "px"
+  );
+  isBigSquare.append(isSmallSquare);
+}
+
+let isSmallSquares = document.querySelectorAll(".smallSquare");
+isSmallSquares.forEach((smallSquare) =>
+  smallSquare.addEventListener("mouseover", paintBlack)
+);
+
+function paintBlack() {
+  this.classList.add("smallSquareColored");
+}

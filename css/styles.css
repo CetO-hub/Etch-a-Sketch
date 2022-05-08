@@ -8,15 +8,23 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .bigSquare {
   display: flex;
-  margin: auto auto;
+  flex-wrap: wrap;
   width: 960px;
-  min-height: 760px;
+  height: 760px;
   border: 5px solid rgb(88, 79, 79);
+  box-sizing: content-box;
 }
 
 .smallSquare {
+  box-sizing: border-box;
+}
+
+.smallSquareColored {
+  background-color: black;
+  border: 1px solid black;
 }
