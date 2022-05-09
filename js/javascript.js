@@ -54,16 +54,19 @@ function fillGrid() {
   } else if (colorMode === "levelBlack" && !this.style.backgroundColor) {
     this.style.backgroundColor = generateLevelBlack();
     return;
+  } else if (
+    colorMode === "levelBlack" &&
+    this.style.backgroundColor.includes("rgba(0, 0, 0")
+  ) {
+    let isbackgroundColor = this.style.backgroundColor;
+    let isOpacity =
+      isbackgroundColor.charAt(14) +
+      isbackgroundColor.charAt(15) +
+      isbackgroundColor.charAt(16);
+    let isFloatOpacity = parseFloat(isOpacity) + 0.1;
+    this.style.backgroundColor = `rgb(0, 0, 0, ${isFloatOpacity})`;
+    return;
   }
-  let isbackgroundColor = this.style.backgroundColor;
-  let isOpacity =
-    isbackgroundColor.charAt(14) +
-    isbackgroundColor.charAt(15) +
-    isbackgroundColor.charAt(16);
-  let isFloatOpacity = parseFloat(isOpacity) + 0.1;
-  this.style.backgroundColor = `rgb(0, 0, 0, ${isFloatOpacity})`;
-  console.log(isOpacity);
-  return;
 }
 
 //Generate random color
