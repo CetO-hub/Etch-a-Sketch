@@ -39,17 +39,31 @@ function listenForHover() {
   let isSmallSquares = document.querySelectorAll(".smallSquare");
 
   isSmallSquares.forEach((smallSquare) =>
-    smallSquare.addEventListener("mouseover", paintBlack)
+    smallSquare.addEventListener("mouseover", fillGrid)
   );
 }
 
 //Paint the squares black when hovering over
-function paintBlack() {
+function fillGrid() {
   if (colorMode === "default") {
     this.classList.add("smallSquareColored");
+    return;
   } else if (colorMode === "randomColor" && !this.style.backgroundColor) {
     this.style.backgroundColor = generateColor();
+    return;
+  } else if (colorMode === "levelBlack" && !this.style.backgroundColor) {
+    this.style.backgroundColor = generateLevelBlack();
+    return;
   }
+  let isbackgroundColor = this.style.backgroundColor;
+  let isOpacity =
+    isbackgroundColor.charAt(14) +
+    isbackgroundColor.charAt(15) +
+    isbackgroundColor.charAt(16);
+  let isFloatOpacity = parseFloat(isOpacity) + 0.1;
+  this.style.backgroundColor = `rgb(0, 0, 0, ${isFloatOpacity})`;
+  console.log(isOpacity);
+  return;
 }
 
 //Generate random color
@@ -60,6 +74,11 @@ function generateColor() {
   let rgba = `rgba(${red}, ${green}, ${blue}, 1.0)`;
   console.log(rgba);
   return rgba;
+}
+
+//Generate 0.1 steps of black level
+function generateLevelBlack() {
+  return "rgba(0,0,0,0.2)";
 }
 
 //Switching between color modes and saving in global variable
