@@ -75,7 +75,6 @@ function generateColor() {
   let green = Math.floor(Math.random() * 255);
   let blue = Math.floor(Math.random() * 255);
   let rgba = `rgba(${red}, ${green}, ${blue}, 1.0)`;
-  console.log(rgba);
   return rgba;
 }
 
